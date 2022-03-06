@@ -9,7 +9,7 @@
 - 删除
 - 移动
 
-也就是说，借助目录监视器，我们就可以获取变动的文件，这个尤其在使用 Lua 开发时有用，因为 Lua 热重载的基础就是检测文件变化，针对变化的文件决定是否进行热重载，以及热重载的策略。
+也就是说，借助目录监视器，我们就可以获取变动的文件。这个尤其在使用 Lua 开发时有用，因为 **Lua 热重载的基础就是检测文件变化，针对变化的文件决定是否进行热重载，以及热重载的策略**。
 
 # 二、实现
 
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 2. `dmon_watch` 可以理解为开始对某个目录进行监视，并添加回调 `watch_callback`
 3. `dmon_uninit` 可以理解为关闭监视器
 
-实际使用中，我们需要传递一个目录 `dir` 参数；另外，为了反馈结果给 `Lua` 层，还需要传递一个 `LUA_FUNCTION` 进去。为了有效控制监听，还可以加上取消监听接口。
+实际使用中，我们需要传递一个目录 `dir` 参数；另外，为了反馈结果给 Lua 层，还需要传递一个 `LUA_FUNCTION` 进去。为了有效控制监听，还可以加上取消监听接口。
 
 所以，它大概是这样子的：
 
@@ -98,7 +98,7 @@ public class DirMonitor {
 2. 在 `AppDelegate.cpp` 中引入 `lua-dir-monitor.h`
 3. 在 `applicationDidFinishLaunching` 中调用 `lua_module_register_dir_monitor(L)` 注册即可
 
-以下是在 `Lua` 层运行的测试用例，这里监视的是 `Lua` 源码目录，你可以根据需要来测试 `新增、修改、删除、移动` 是否有效：
+以下是在 Lua 层运行的测试用例，这里监视的是 Lua 源码目录 `src`，你可以根据需要来测试 `新增、修改、删除、移动` 是否有效：
 
 ```lua
 function watchDirectory(node)
